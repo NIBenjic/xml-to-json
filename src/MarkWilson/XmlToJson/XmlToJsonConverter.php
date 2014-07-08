@@ -35,7 +35,7 @@ class XmlToJsonConverter
     {
         $data = [];
 
-        // loop through the attributes and append them to the data array with '-' suffix on keys
+        // loop through the attributes and append them to the data array with '-' prefix on keys
         foreach ($xml->attributes() as $key => $value) {
             $data['-' . $key] = (string)$value;
         }
@@ -62,7 +62,7 @@ class XmlToJsonConverter
             // get the string value of the XML
             $value = (string)$xml;
 
-            // check if this is just a single value element, i.e. <Element>Value</Element
+            // check if this is just a single value element, i.e. <Element>Value</Element>
             if (count($data) === 0) {
                 $data = $value;
             } else {
