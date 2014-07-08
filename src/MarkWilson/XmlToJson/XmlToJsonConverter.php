@@ -17,14 +17,30 @@ class XmlToJsonConverter
             $data['-' . $key] = (string)$value;
         }
 
-        $children = $xml->children();
+        if ($xml->count() > 0) {
+            $children = $xml->children();
 
-        if (count($children) > 0) {
             foreach ($children as $key => $child) {
-                $data[$key] = $this->getData($child);
+                $childData = $this->getData($child);
+
+                if (isset($data[$key])) {
+                    if (is_array($data[$key])) {
+                        $data[$key][] = $childData;
+                    } else {
+                        $data[$key] = [$data[$key], $childData];
+                    }
+                } else {
+                    $data[$key] = $childData;
+                }
             }
         } else {
-            $data['#text'] = (string)$xml;
+            $value = (string)$xml;
+
+            if (count($data) === 0) {
+                $data = $value;
+            } else {
+                $data['#text'] = (string)$xml;
+            }
         }
 
         return $data;
