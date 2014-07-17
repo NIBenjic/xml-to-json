@@ -48,6 +48,14 @@ class XmlToJsonConverterTest extends \PHPUnit_Framework_TestCase
             [
                 '<Main><Child demo="something" another="something else" /><Child demo="something" another="something else" /><Child demo="something" another="something else" /></Main>',
                 '{"Main":{"Child":[{"-demo":"something","-another":"something else"},{"-demo":"something","-another":"something else"},{"-demo":"something","-another":"something else"}]}}'
+            ],
+            [
+                '<Main><Child demo="something" /><Child demo="something" /><Child demo="something" /></Main>',
+                '{"Main":{"Child":[{"-demo":"something"},{"-demo":"something"},{"-demo":"something"}]}}'
+            ],
+            [
+                '<Main><Child demo="something">Value</Child><Child demo="something">Value</Child><Child demo="something">Value</Child></Main>',
+                '{"Main":{"Child":[{"-demo":"something","#text":"Value"},{"-demo":"something","#text":"Value"},{"-demo":"something","#text":"Value"}]}}'
             ]
         ];
     }
