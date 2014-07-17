@@ -65,7 +65,7 @@ class XmlToJsonConverter
             // check if this is just a single value element, i.e. <Element>Value</Element>
             if (count($data) === 0) {
                 $data = $value;
-            } else if (strlen((string) $xml)) {
+            } elseif (strlen((string) $xml)) {
                 $data['#text'] = (string)$xml;
             }
         }
