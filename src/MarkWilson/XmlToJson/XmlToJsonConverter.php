@@ -19,7 +19,7 @@ class XmlToJsonConverter
      */
     public function convert(\SimpleXMLElement $xml)
     {
-        return json_encode([$xml->getName() => $this->getData($xml)]);
+        return json_encode(array($xml->getName() => $this->getData($xml)));
     }
 
     /**
@@ -33,7 +33,7 @@ class XmlToJsonConverter
      */
     private function getData(\SimpleXMLElement $xml)
     {
-        $data = [];
+        $data = array();
 
         // loop through the attributes and append them to the data array with '-' prefix on keys
         foreach ($xml->attributes() as $key => $value) {
@@ -52,7 +52,7 @@ class XmlToJsonConverter
                     if (is_array($data[$key])) {
                         $data[$key][] = $childData;
                     } else {
-                        $data[$key] = [$data[$key], $childData];
+                        $data[$key] = array($data[$key], $childData);
                     }
                 } else {
                     $data[$key] = $childData;
@@ -65,7 +65,7 @@ class XmlToJsonConverter
             // check if this is just a single value element, i.e. <Element>Value</Element>
             if (count($data) === 0) {
                 $data = $value;
-            } else {
+            } elseif (strlen((string) $xml)) {
                 $data['#text'] = (string)$xml;
             }
         }
