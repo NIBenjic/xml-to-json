@@ -55,7 +55,13 @@ class XmlToJsonConverter
                         $data[$key] = array($data[$key], $childData);
                     }
                 } else {
-                    $data[$key] = $childData;
+                    $data[$key] = array($childData);
+                }
+            }
+
+            foreach ($data as $key => $value) {
+                if (is_array($value) && count($value) === 1) {
+                    $data[$key] = $value[0];
                 }
             }
         } else {
