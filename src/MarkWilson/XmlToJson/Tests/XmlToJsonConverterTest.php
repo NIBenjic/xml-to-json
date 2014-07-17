@@ -44,6 +44,10 @@ class XmlToJsonConverterTest extends \PHPUnit_Framework_TestCase
             ], [
                 '<Metadata><SubscriptionCreate url="http://www.google.com/home#anchor"/><SubscriptionValidate url="https://yahoo.com/login" required="N"/><Studio email="studio@gmail.com" phone="020 7607 3200"/></Metadata>',
                 '{"Metadata":{"SubscriptionCreate":{"-url":"http:\/\/www.google.com\/home#anchor"},"SubscriptionValidate":{"-url":"https:\/\/yahoo.com\/login","-required":"N"},"Studio":{"-email":"studio@gmail.com","-phone":"020 7607 3200"}}}'
+            ],
+            [
+                '<Main><Sub><Child demo="something" another="something else" /><Child demo="something" another="something else" /><Child demo="something" another="something else" /></Sub></Main>',
+                '{"Main":{"Sub":{"Child":[{"-demo": "something,"-another":"something else"},{"-demo": "something,"-another":"something else"},{"-demo": "something,"-another":"something else"}]}}}'
             ]
         ];
     }
