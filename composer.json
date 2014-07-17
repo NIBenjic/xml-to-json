@@ -14,5 +14,5 @@
             "MarkWilson": "./src"
         }
     },
-    license: "MIT"
+    "license": "MIT"
 }
