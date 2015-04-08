@@ -19,7 +19,19 @@ class XmlToJsonConverter
      */
     public function convert(\SimpleXMLElement $xml)
     {
-        return json_encode(array($xml->getName() => $this->getData($xml)));
+        return json_encode($this->asArray($xml));
+    }
+
+    /**
+     * Convert from SimpleXMLElement to PHP array
+     *
+     * @param \SimpleXMLElement $xml XML element
+     *
+     * @return array
+     */
+    public function asArray(\SimpleXMLElement $xml)
+    {
+        return array($xml->getName() => $this->getData($xml));
     }
 
     /**
